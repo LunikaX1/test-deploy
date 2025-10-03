@@ -1,0 +1,20 @@
+name: Deploy via SSH (build on server)
+on:
+  push:
+    branches: [ "main" ]   # เปลี่ยนชื่อ branch ถ้าต้องการ
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run remote deploy script over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          envs: BRANCH
+          script: |
+            export BRANCH="main"                    # เปลี่ยนตาม branch ที่ใช้
+            /apps/test/deploy.sh
