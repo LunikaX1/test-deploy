@@ -17,4 +17,4 @@ jobs:
           envs: BRANCH
           script: |
             export BRANCH="main"                    # เปลี่ยนตาม branch ที่ใช้
-            /apps/test/deploy.sh
+            sudo /apps/test/deploy.sh
